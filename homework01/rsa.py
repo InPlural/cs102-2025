@@ -1,6 +1,6 @@
 import random
 import typing as tp
-from typing import Tuple, Any
+from typing import Any, Tuple
 
 
 def is_prime(n: int) -> bool:

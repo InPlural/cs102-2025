@@ -43,13 +43,13 @@ def decrypt_vigenere(ciphertext: str, keyword: str) -> str:
     """
     plaintext = ""
     key_len = len(keyword)
-    for key_idx, char in enumerate(plaintext):
+    for key_idx, char in enumerate(ciphertext):
         if "A" <= char <= "Z":
             a_idx = ord("A")
         elif "a" <= char <= "z":
             a_idx = ord("a")
         else:
-            ciphertext += char
+            plaintext += char
             continue
 
         position = ord(char) - a_idx

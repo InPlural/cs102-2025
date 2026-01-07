@@ -1,5 +1,6 @@
 import random
 import typing as tp
+from typing import Tuple, Any
 
 
 def is_prime(n: int) -> bool:
@@ -37,15 +38,24 @@ def gcd(a: int, b: int) -> int:
     return a
 
 
-def multiplicative_inverse(e: int, phi: int) -> int:
+def multiplicative_inverse(e: int, phi: int) -> tuple[Any, int | Any, int]:
     """
     Euclid's extended algorithm for finding the multiplicative
     inverse of two numbers.
     >>> multiplicative_inverse(7, 40)
     23
     """
-    # PUT YOUR CODE HERE
-    pass
+    def gcdExtended(a, b):
+        if a == 0:
+            return b, 0, 1
+
+        gcd, x1, y1 = gcdExtended(b % a, a)
+        x = y1 - (b // a) * x1
+        y = x1
+        return gcd, x, y
+    _, x, _ = gcdExtended(e, phi)
+    return x % phi
+
 
 
 def generate_keypair(p: int, q: int) -> tp.Tuple[tp.Tuple[int, int], tp.Tuple[int, int]]:

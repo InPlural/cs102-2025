@@ -46,8 +46,8 @@ def decrypt_caesar(ciphertext: str, shift: int = 3) -> str:
                 typeface = ord("A")
             else:
                 typeface = ord("a")
-            new_char = chr((ord(char) - typeface - shift) % alpha_size + typeface)
-            plaintext += new_char
+            init_char = chr((ord(char) - typeface - shift) % alpha_size + typeface)
+            plaintext += init_char
         else:
             plaintext += char
     return plaintext

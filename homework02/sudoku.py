@@ -38,7 +38,7 @@ def group(values: tp.List[T], n: int) -> tp.List[tp.List[T]]:
     >>> group([1,2,3,4,5,6,7,8,9], 3)
     [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
     """
-    return [values[i: i + n] for i in range(0, len(values), n)]
+    return [values[i : i + n] for i in range(0, len(values), n)]
 
 
 def get_row(grid: tp.List[tp.List[str]], pos: tp.Tuple[int, int]) -> tp.List[str]:
@@ -79,7 +79,7 @@ def get_block(grid: tp.List[tp.List[str]], pos: tp.Tuple[int, int]) -> tp.List[s
     """
     row, col = pos
     size = len(grid)
-    block = int(size ** 0.5)
+    block = int(size**0.5)
 
     init_row = (row // block) * block
     init_col = (col // block) * block
@@ -100,7 +100,7 @@ def find_empty_positions(grid: tp.List[tp.List[str]]) -> tp.Optional[tp.Tuple[in
     """
     for row in grid:
         for cell in row:
-            if cell == '.':
+            if cell == ".":
                 return grid.index(row), row.index(cell)
 
     return None
@@ -116,10 +116,10 @@ def find_possible_values(grid: tp.List[tp.List[str]], pos: tp.Tuple[int, int]) -
     >>> values == {'2', '5', '9'}
     True
     """
-    all_numbers = set('123456789')
+    all_numbers = set("123456789")
 
     used = set(get_row(grid, pos)) | set(get_col(grid, pos)) | set(get_block(grid, pos))
-    used.discard('.')  # так как использование .remove может вызвать ошибку
+    used.discard(".")  # так как использование .remove может вызвать ошибку
 
     return all_numbers - used
 
@@ -149,7 +149,7 @@ def solve(grid: tp.List[tp.List[str]]) -> tp.Optional[tp.List[tp.List[str]]]:
         if solve(grid) is not None:
             return grid
 
-        grid[row][col] = '.'
+        grid[row][col] = "."
 
     return None
 
@@ -159,7 +159,7 @@ def check_solution(solution: tp.List[tp.List[str]]) -> bool:
     # TODO: Add doctests with bad puzzles
     all_numbers = set("123456789")
     size = len(solution)
-    block_size = int(size ** 0.5)
+    block_size = int(size**0.5)
 
     for row in range(size):
         if set(solution[row]) != all_numbers:
@@ -201,8 +201,8 @@ def generate_sudoku(N: int) -> tp.List[tp.List[str]]:
     True
     """
     size = 9
-    block_size = int(size ** 0.5)
-    total = size ** 2
+    block_size = int(size**0.5)
+    total = size**2
     N = max(0, min(N, total))
 
     grid = [["." for _ in range(size)] for _ in range(size)]

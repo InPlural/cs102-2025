@@ -1,6 +1,6 @@
 import pathlib
-import typing as tp
 import random
+import typing as tp
 
 T = tp.TypeVar("T")
 
@@ -50,7 +50,7 @@ def get_row(grid: tp.List[tp.List[str]], pos: tp.Tuple[int, int]) -> tp.List[str
     >>> get_row([['1', '2', '3'], ['4', '5', '6'], ['.', '8', '9']], (2, 0))
     ['.', '8', '9']
     """
-    row, _ = pos    # или return grid[pos[0]]?
+    row, _ = pos  # или return grid[pos[0]]?
     return grid[row]
 
 
@@ -119,7 +119,7 @@ def find_possible_values(grid: tp.List[tp.List[str]], pos: tp.Tuple[int, int]) -
     all_numbers = set('123456789')
 
     used = set(get_row(grid, pos)) | set(get_col(grid, pos)) | set(get_block(grid, pos))
-    used.discard('.')   # так как использование .remove может вызвать ошибку
+    used.discard('.')  # так как использование .remove может вызвать ошибку
 
     return all_numbers - used
 
@@ -225,7 +225,6 @@ def generate_sudoku(N: int) -> tp.List[tp.List[str]]:
         grid[row][col] = "."
 
     return grid
-
 
 
 if __name__ == "__main__":

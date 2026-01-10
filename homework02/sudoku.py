@@ -1,5 +1,6 @@
 import pathlib
 import typing as tp
+import random
 
 T = tp.TypeVar("T")
 
@@ -78,7 +79,7 @@ def get_block(grid: tp.List[tp.List[str]], pos: tp.Tuple[int, int]) -> tp.List[s
     """
     row, col = pos
     size = len(grid)
-    block = int(size**0.5)
+    block = int(size ** 0.5)
 
     init_row = (row // block) * block
     init_col = (col // block) * block
@@ -156,7 +157,26 @@ def solve(grid: tp.List[tp.List[str]]) -> tp.Optional[tp.List[tp.List[str]]]:
 def check_solution(solution: tp.List[tp.List[str]]) -> bool:
     """Если решение solution верно, то вернуть True, в противном случае False"""
     # TODO: Add doctests with bad puzzles
-    pass
+    all_numbers = set("123456789")
+    size = len(solution)
+    block_size = int(size ** 0.5)
+
+    for row in range(size):
+        if set(solution[row]) != all_numbers:
+            return False
+
+    for col in range(size):
+        col_values = [solution[row][col] for row in range(size)]
+        if set(col_values) != all_numbers:
+            return False
+
+    for block_row in range(0, size, block_size):
+        for block_col in range(0, size, block_size):
+            block_values = get_block(solution, (block_row, block_col))
+            if set(block_values) != all_numbers:
+                return False
+
+    return True
 
 
 def generate_sudoku(N: int) -> tp.List[tp.List[str]]:
@@ -180,7 +200,32 @@ def generate_sudoku(N: int) -> tp.List[tp.List[str]]:
     >>> check_solution(solution)
     True
     """
-    pass
+    size = 9
+    block_size = int(size ** 0.5)
+    total = size ** 2
+    N = max(0, min(N, total))
+
+    grid = [["." for _ in range(size)] for _ in range(size)]
+
+    for block in range(3):  # заполняем только блоки по диагонали чтобы решение было валидным
+        numbers = [str(i) for i in range(1, size + 1)]
+        random.shuffle(numbers)
+        idx = 0
+        for row in range(block_size):
+            for col in range(block_size):
+                grid[block * block_size + row][block * block_size + col] = numbers[idx]
+                idx += 1
+
+    solve(grid)
+
+    all_positions = [(row, col) for row in range(size) for col in range(size)]
+    random.shuffle(all_positions)
+
+    for row, col in all_positions[: (total - N)]:
+        grid[row][col] = "."
+
+    return grid
+
 
 
 if __name__ == "__main__":

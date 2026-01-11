@@ -1,7 +1,8 @@
 import tkinter as tk
 from copy import deepcopy
-from typing import List
 from tkinter import ttk
+from typing import List
+
 from maze import bin_tree_maze, solve_maze, add_path_to_grid
 
 

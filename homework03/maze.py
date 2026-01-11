@@ -145,8 +145,6 @@ def shortest_path(
 
         path.append((row, col))
 
-    path.reverse()
-
     return path
 
 

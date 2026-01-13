@@ -1,4 +1,4 @@
-alpha_size = 26
+ALPHA_SIZE = 26
 
 
 def encrypt_caesar(plaintext: str, shift: int = 3) -> str:
@@ -20,7 +20,7 @@ def encrypt_caesar(plaintext: str, shift: int = 3) -> str:
                 typeface = ord("A")
             else:
                 typeface = ord("a")
-            new_char = chr((ord(char) - typeface + shift) % alpha_size + typeface)
+            new_char = chr((ord(char) - typeface + shift) % ALPHA_SIZE + typeface)
             ciphertext += new_char
         else:
             ciphertext += char
@@ -46,7 +46,7 @@ def decrypt_caesar(ciphertext: str, shift: int = 3) -> str:
                 typeface = ord("A")
             else:
                 typeface = ord("a")
-            init_char = chr((ord(char) - typeface - shift) % alpha_size + typeface)
+            init_char = chr((ord(char) - typeface - shift) % ALPHA_SIZE + typeface)
             plaintext += init_char
         else:
             plaintext += char

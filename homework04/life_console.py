@@ -14,7 +14,7 @@ class Console(UI):
         screen.border(0)
 
     def draw_grid(self, screen) -> None:
-        """ Отобразить состояние клеток. """
+        """Отобразить состояние клеток."""
 
         height, width = screen.getmaxyx()
         i = 1
